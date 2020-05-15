@@ -28,10 +28,6 @@ cdo_conflicts = {
  '2021-01-03' :  ['Edwards']
 }
 
-
-
-
-
 class Company_Duty:
     def __init__(self,midshipmen,conflicts):
         self.mids_list = midshipmen
@@ -77,9 +73,15 @@ class Company_Duty:
         for key, value in self.schedule.items():
             print(key, ' : ', value)
 
-sched = Company_Duty(cdos,cdo_conflicts)
-sched.addDays()
-sched.run()
-# sched.printForm()
-date = list(sched.schedule.keys())[0]
-print( [date,sched.schedule[date]] )
+def getData(cdos = cdos,cdo_conflicts = cdo_conflicts):
+    sched = Company_Duty(cdos,cdo_conflicts)
+    sched.addDays()
+    sched.run()
+    data = []
+    for i in range(0,len(sched.schedule.keys())):
+        date = list(sched.schedule.keys())[i]
+        data.append( [date,sched.schedule[date]] )
+    return data
+
+if 1 == 0:
+    print(getData())

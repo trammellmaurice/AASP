@@ -79,5 +79,7 @@ class Company_Duty:
 
 sched = Company_Duty(cdos,cdo_conflicts)
 sched.addDays()
-sched.run(True)
-sched.printForm()
+sched.run()
+# sched.printForm()
+date = list(sched.schedule.keys())[0]
+print( [date,sched.schedule[date]] )

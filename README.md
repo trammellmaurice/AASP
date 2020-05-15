@@ -1,6 +1,4 @@
 # Semi-Autonomous Adjutant Sergeant Program #
-----------------------------------------------
-Automated Adjutant Sergeant Program
 
 ## AUTOMATE THE 30TH COMPANY WATCH PROCESS ##
 ----------------------------------------------

@@ -23,10 +23,13 @@
   * OUTPUT : Events added to calendar / Emails sent to invitees
 ----------------------------------------------------------------
 * ### Supporting Infrastructure ###
+
   __info.py__
   * INPUT : Midshipmen Name
   * OUTPUT : Midshipmen email or alpha
+
   __calendar_auth.py__
   * Authentication for google calendar API
+  
   __credentials.json__
   * Credentials for Google Calendar API

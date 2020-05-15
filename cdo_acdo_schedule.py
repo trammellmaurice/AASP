@@ -39,7 +39,7 @@ class Company_Duty:
     # Let's create one month and iterate through it to mark each UNASSIGNED
     # TODO: Get the accurate days
     def addDays(self):
-        for i in range(8,13):
+        for i in range(8,9):
             for day in self.cal.itermonthdates(2020, i):
                 self.schedule[str(day)] = "unassigned"
 

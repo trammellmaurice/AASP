@@ -9,7 +9,7 @@ EXAMPLE:
 #blank schedule
 schedule = {}
 
-# List of Midshipmen
+# MIDSHIPMEN
 cdos = ['Ahmadazani',
 'Anthony','Arlett','Book','Chavez',
 'Clymer','Cobb','Cortez','Craig','Craine',
@@ -18,8 +18,23 @@ cdos = ['Ahmadazani',
 'Kilic','Lake','Leins','Mcginnis','Mcinerney',
 'Midgette','Parsons','Polmatier','Rooney','Sand',
 'Satre','Tumbas']
+acdos = ['Almas',
+'Bain','Barta','Buchanan',
+'Buckley','Certesio','Collins',
+'Corcoran','Csuka','Duncan',
+'Fagot','Fiore','Hunter',
+'Kim','Mcdonough','Mckeon',
+'Mckilligan','Medina','Mercer',
+'Nielson','Norman','Nufer',
+'Peterson','Purvis','Richardson'
+'Shen','Sosinsky','Stenberg',
+'Thomas','Treseler','Vilinskis',
+'Vu','Waaler','Wade',
+'Ward','Williams','Williams',
+'Witt'
+]
 
-
+# CONFLICTS
 cdo_conflicts = {
 # date : name
 # list of when people cant stand CDO
@@ -27,6 +42,7 @@ cdo_conflicts = {
  '2020-05-14'  :  ['Jennings'],
  '2021-01-03' :  ['Edwards']
 }
+acdo_conflicts = {}
 
 class Company_Duty:
     def __init__(self,midshipmen,conflicts):
@@ -73,7 +89,7 @@ class Company_Duty:
         for key, value in self.schedule.items():
             print(key, ' : ', value)
 
-def getData(cdos = cdos,cdo_conflicts = cdo_conflicts):
+def getCDO(cdos = cdos,cdo_conflicts = cdo_conflicts):
     sched = Company_Duty(cdos,cdo_conflicts)
     sched.addDays()
     sched.run()
@@ -83,5 +99,8 @@ def getData(cdos = cdos,cdo_conflicts = cdo_conflicts):
         data.append( [date,sched.schedule[date]] )
     return data
 
-if 1 == 0:
-    print(getData())
+def getACDO(cdos = acdos,cdo_conflicts = acdo_conflicts):
+    return getCDO(cdos,cdo_conflicts)
+
+if 1 == 1:
+    print(getACDO())

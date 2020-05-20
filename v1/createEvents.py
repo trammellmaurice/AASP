@@ -4,7 +4,8 @@ from calendar_auth import auth
 from info import getEmail
 
 #FOR THIS TEST
-from cdo_acdo_schedule import getData
+from cdo_acdo_schedule import getCDO
+from cdo_acdo_schedule import getACDO
 
 # sample event as template
 """event = {
@@ -34,13 +35,20 @@ THIS IS A TEST OF THE AUTONOMOUS ADJUTANT SERGEANT PROGRAM __CDO_ASSIGNMENT__ CA
 THIS IS A TEST OF THE AUTONOMOUS ADJUTANT SERGEANT PROGRAM __CDO_ASSIGNMENT__ CAPABILITY""",
 }
 operational = {
-'summary' : 'CDO Watch: ',
+'summaryC' : 'CDO Watch: ',
+'summaryA' : 'ACDO Watch: ',
 'description' : 'This event was created by the Autonomous Adjutant Sergeant Program: if there are any issues with this event (time, date, assignment, description, etc.) please contact your Company Adjutant',
 }
+
+"""
+CDO SCHEDULE METHOD
+[Input] Watch schedule: Key value pairs name and date
+[Output] One event formatted for Google Calendar API
+"""
 def makeCDO(info):
     # blank event object
     event = {
-        'summary' : 'Sample CDO: ' + info[1],
+        'summary' : testing['summary'] + info[1],
         'description' : testing['description'],
         'start' : {
             'date' : info[0],
@@ -54,6 +62,13 @@ def makeCDO(info):
     }
     return event
 
+"""
+ACWATCH SCHEDULE METHOD
+[Input] Watch schedule: Key value pairs name and day
+[Mechanics] - Connect day to date -
+[Output] One event at a time formatted for Google Calendar API
+"""
+
 def addEvent(event):
     service = auth() # authenticate and get the service object
     # Call the Calendar API
@@ -61,7 +76,7 @@ def addEvent(event):
     print ('Event created: %s' % (event.get('htmlLink')))
 
 if 1 == 1:
-    data = getData()
+    data = getCDO()
     # print(data)
     for watch in data:
         # print(watch)

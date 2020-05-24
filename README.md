@@ -1,16 +1,28 @@
-# (Semi)Autonomous Adjutant Sergeant Program #
+# (Semi)Autonomous Adjutant Sergeant Program Version 2#
 
 ## AUTOMATE THE 30TH COMPANY WATCH PROCESS ##
 ----------------------------------------------
+* ### Watch Object ###
+  __watch_obj.py__
+  * Object for lower watches
+  * INPUT position, date,start_time,end_time ,timeZone, name
+  ----------------------------------------------
+* ### Duty Object ###
+  __duty_obj.py__
+  * Object for higher watches (CDO, ACDO, duty days)
+  * INPUT position, date,start_date,end_date,name,previous
+----------------------------------------------
 * ### Academic Watch Schedule Program ###
-  __ac-watch.py__
-  * INPUT : Dictionary {'Name' : 'Free Periods'}
-  * OUTPUT : Schedule of names assigned to watches
+  __acwatch_assign.py__
+  * INITIALIZE a schedule week (designate the days (M,T,W,R,F))
+  * ASSIGN : Input a schedule, the date of the Monday, and OPTIONAL shuffle
+  * OUTPUT : A list of Watch objects
 ----------------------------------------------------
 * ### Company / Assistant Company Duty Officer Schedule Program ###
-  __cdo_acdo_schedule.py__
-  * INPUTS : List of Midshipmen ['A','B'], Dictionary of Conflicts {'2020-04-28' : ['A','B']}
-  * OUTPUT : Schedule of names assigned to dates (CDO / ACDO separate)
+  __do_assign.py__
+  * Assign 1/C and 2/C CDO or ACDO Duty objects
+  * Takes into account date conflicts
+  * OUTPUT : A list of duty Objects
 ----------------------------------------------------
 * ### Pull from Calendar Program / Setup ###
   __quickstart.py__
@@ -18,18 +30,19 @@
   * OUTPUT : 10 Events from Calendar
 ----------------------------------------------------
 * ### Add Events to Schedule Program ###
-  __createEvents.py__
-  * INPUTS : CDO / ACDO Schedule (calls cdo-acdo-schedule.py getData())
-  * OUTPUT : Events added to calendar / Emails sent to invitees
+  __calendar_update.py__
+  * Make Duty and Watch Calendar events for input
+  * OUTPUT : Use GCal API to add to GCalendar
 ----------------------------------------------------------------
 * ### Supporting Infrastructure ###
 
   __info.py__
-  * INPUT : Midshipmen Name
-  * OUTPUT : Midshipmen email or alpha
+  * Holds information for the company
+  * METHODS : getEmail(), getFirst(), getSecond(), getThird(), getFreePeriods(), getPeriodTime(), assignSections(), getWeekDates()
+  * Used for every other program
 
   __calendar_auth.py__
   * Authentication for google calendar API
-  
+
   __credentials.json__
   * Credentials for Google Calendar API

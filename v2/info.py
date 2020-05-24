@@ -1,4 +1,6 @@
 import calendar
+import random
+
 """
 NAME -> ALPHA
 """
@@ -340,6 +342,50 @@ def getPeriodTime(period):
     return periods[period]
 
 """
+DUTY SECTION STUFF
+"""
+duty_sections = {
+    1: {2: [], 3: []},
+    2: {2: [], 3: []},
+    3: {2: [], 3: []},
+    4: {2: [], 3: []},
+    5: {2: [], 3: []},
+    6: {2: [], 3: []},
+    7: {2: [], 3: []},
+    8: {2: [], 3: []},
+    9: {2: [], 3: []}
+}
+
+def assignSections():
+    # get class lists
+    seconds = getSecond()
+    num_sec = len(seconds)//9
+    thirds = getThird()
+    num_third = len(thirds)//9
+    random.shuffle(seconds)
+    random.shuffle(thirds)
+    # TODO : 4/C
+    for section in duty_sections:
+        for i in range(0,num_sec):
+            duty_sections[section][2].append(seconds.pop())
+        for i in range(0,num_third):
+            duty_sections[section][3].append(thirds.pop())
+    for section in duty_sections:
+        while len(seconds) > 0:
+            duty_sections[section][2].append(seconds.pop())
+            break
+        while len(thirds) > 0:
+            duty_sections[section][3].append(thirds.pop())
+            break
+    return duty_sections
+
+def showSections(duty_schedule):
+    # print with format
+    for section in duty_schedule:
+        print('Section ' + str(section) + '| Second Class: ' + str(duty_schedule[section][2]) + ' Youngsters: ' + str(duty_schedule[section][3]))
+        print('_________|________________________________________________________________________________________________________________________')
+
+"""
 TIME & DATE STUFF
 """
 def getWeekDates(start_date): #GET A LIST OF DATES THAT WEEK ***MUST BE A MONDAY***
@@ -373,3 +419,6 @@ if 1 == 0:
     # print(getThird())
     # print(getFreePeriods('Macaluso'))
     print(getWeekDates('2020-05-18'))
+
+if 1 == 0:
+    showSections(assignSections())

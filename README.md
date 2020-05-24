@@ -1,4 +1,4 @@
-# (Semi)Autonomous Adjutant Sergeant Program Version 2#
+# (Semi)Autonomous Adjutant Sergeant Program Version 2 #
 
 ## AUTOMATE THE 30TH COMPANY WATCH PROCESS ##
 ----------------------------------------------

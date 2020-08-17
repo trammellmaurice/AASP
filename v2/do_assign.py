@@ -1,5 +1,6 @@
 import calendar
 import random
+import datetime
 
 # custom imports
 from info import *
@@ -51,10 +52,11 @@ def initialize(start,end): # input a pair (first, last)
     schedule = [] # need to fill this with Duty objects
     for i in range(start,end):
         for date in calendar.Calendar().itermonthdates(2020, i):
-            schedule.append(str(date))
+            if date.weekday() <= 4:
+                schedule.append(date)
     return schedule
 
-def assignDO(grade, schedule, shuffle = False):
+def assignDO(grade, schedule, shuffle = True):
     """
     Take in a list of midshipmen and pop off the next one
     OPTIONALLY
@@ -89,12 +91,12 @@ def assignDO(grade, schedule, shuffle = False):
                         # fill it with duty objects
                 # schedule[index] = list[0]
                 # TODO: check for weekends and make them multi day watch objects
-                schedule[index] = Duty(position, schedule[index], schedule[index], list[0], list[len(list)-1])
-                list.append(list.pop(0))
-            else:
-                # schedule[index] = list[0]
-                schedule[index] = Duty(position, schedule[index], schedule[index], list[0], list[len(list)-1])
-                list.append(list.pop(0))
+        if schedule[index].weekday() == 4:
+            schedule[index] = Duty(position, str(schedule[index]), str(schedule[index] + datetime.timedelta(days=2)), list[0], list[len(list)-1])
+        else:
+            schedule[index] = Duty(position, str(schedule[index]), str(schedule[index]), list[0], list[len(list)-1])
+        list.append(list.pop(0))
+
     return schedule
 
 
@@ -104,5 +106,5 @@ if 1 == 0:
     # print(second)
     # print(third)
     # print(addConflict('2020-04-29', 'Treseler'))
-    show(assignDO(2,initialize(6,7)))
+    show(assignDO(1,initialize(6,7)))
     # print(assign(2,initialize(8,9)))

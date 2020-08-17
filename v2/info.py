@@ -182,7 +182,6 @@ else:
     'Duncan' : 221836,
     'Fagot' : 221968,
     'Fiore' : 222076,
-    'Hunter' : 223126,
     'Kim' : 223498,
     'Mcdonough' : 224314,
     'Mckeon' : 224356,
@@ -203,7 +202,7 @@ else:
     'Vilinskis' : 226798,
     'Vu' : 226852,
     'Waaler' : 226858,
-    'Wade' : 226864,
+    #'Wade' : 226864,
     'Ward' : 226924,
     'C.Williams' : 227074,
     'J.Williams' : 227092,
@@ -250,6 +249,49 @@ else:
     'Weimer' : 236732,
     'Wheelock' : 236816,
     }
+    fourth = {
+    'Adkinson' : 24,
+    'Alexander' :24,
+    'Anderson' :24,
+    'Arline' :24,
+    'Becker':24,
+    'Bland':24,
+    'Bly':24,
+    'Boamah':24,
+    'Brown':24,
+    'Cerniglia':24,
+    'Cole':24,
+    'Cromwell': 24,
+    'Esqueda' :24,
+    'Feng':24,
+    'Gerard':24,
+    'Gonzalezreed':24,
+    'Green':24,
+    'Gruendling':24,
+    'Grumme':24,
+    'Guetig':24,
+    'Ho':24,
+    'Kampling' :24,
+    'Kimmel' :24,
+    'Kitsch':24,
+    'Mcgovern':24,
+    'Miller':24,
+    'Moore':24,
+    'Ngo':24,
+    'Proctor':24,
+    'Savage':24,
+    'Stevens':24,
+    'Sundvall':24,
+    'Tang':24,
+    'Tong':24,
+    'Umbarger':24,
+    'Vath':24,
+    'Wojtylak':24,
+    'Wood':24,
+    'Yelensky':24,
+    'Zimmer':24
+    }
+
 
 def getEmail(mid):
     # go through all classes
@@ -259,6 +301,8 @@ def getEmail(mid):
         grade = second
     if(mid in third):
         grade = third
+    if(mid in fourth):
+        grade = fourth
     alpha = grade[mid]
     email = 'm' + str(alpha) + '@usna.edu'
     return email
@@ -272,6 +316,8 @@ def getSecond():
 def getThird():
     return list(third.keys())
 
+def getFourth():
+    return list(fourth.keys())
 """
 NAME -> FREE PERIODS
 """
@@ -345,31 +391,37 @@ def getPeriodTime(period):
 DUTY SECTION STUFF
 """
 duty_sections = {
-    1: {2: [], 3: []},
-    2: {2: [], 3: []},
-    3: {2: [], 3: []},
-    4: {2: [], 3: []},
-    5: {2: [], 3: []},
-    6: {2: [], 3: []},
-    7: {2: [], 3: []},
-    8: {2: [], 3: []},
-    9: {2: [], 3: []}
+    1: {2: [], 3: [], 4: []},
+    2: {2: [], 3: [], 4: []},
+    3: {2: [], 3: [], 4: []},
+    4: {2: [], 3: [], 4: []},
+    5: {2: [], 3: [], 4: []},
+    6: {2: [], 3: [], 4: []},
+    7: {2: [], 3: [], 4: []},
+    8: {2: [], 3: [], 4: []},
+    9: {2: [], 3: [], 4: []}
 }
 
 def assignSections():
+    random.seed(12)
     # get class lists
     seconds = getSecond()
     num_sec = len(seconds)//9
     thirds = getThird()
     num_third = len(thirds)//9
+    fourths = getFourth()
+    num_fourth = len(fourths)//9
     random.shuffle(seconds)
     random.shuffle(thirds)
+    random.shuffle(fourths)
     # TODO : 4/C
     for section in duty_sections:
         for i in range(0,num_sec):
             duty_sections[section][2].append(seconds.pop())
         for i in range(0,num_third):
             duty_sections[section][3].append(thirds.pop())
+        for i in range(0,num_fourth):
+            duty_sections[section][4].append(fourths.pop())
     for section in duty_sections:
         while len(seconds) > 0:
             duty_sections[section][2].append(seconds.pop())
@@ -377,13 +429,16 @@ def assignSections():
         while len(thirds) > 0:
             duty_sections[section][3].append(thirds.pop())
             break
+        while len(fourths) > 0:
+            duty_sections[section][4].append(fourths.pop())
+            break
     return duty_sections
 
 def showSections(duty_schedule):
     # print with format
     for section in duty_schedule:
-        print('Section ' + str(section) + '| Second Class: ' + str(duty_schedule[section][2]) + ' Youngsters: ' + str(duty_schedule[section][3]))
-        print('_________|________________________________________________________________________________________________________________________')
+        print('Section ' + str(section) + '| Second Class: ' + str(duty_schedule[section][2]) + ' Youngsters: ' + str(duty_schedule[section][3]) + ' Plebes: ' + str(duty_schedule[section][4]))
+        print('_________|________________________________________________________________________________________________________________________________________________________________________')
 
 """
 TIME & DATE STUFF
@@ -412,13 +467,30 @@ FORMAT STUFF
 def show(schedule):
     for duty in schedule:
         duty.show()
+
+def getDayOfWeek(date_number):
+    if date_number == 0:
+        return 'Monday'
+    elif date_number == 1:
+        return 'Tuesday'
+    elif date_number == 2:
+        return 'Wednesday'
+    elif date_number == 3:
+        return 'Thursday'
+    elif date_number == 4:
+        return 'Friday'
+    elif date_number == 5:
+        return 'Saturday'
+    elif date_number == 6:
+        return 'Sunday'
+
 if 1 == 0:
-    # print(getEmail('Macaluso'))
+    print(getEmail('Macaluso'))
     # print(getFirst())
     # print(getSecond())
     # print(getThird())
     # print(getFreePeriods('Macaluso'))
-    print(getWeekDates('2020-05-18'))
+    # print(getWeekDates('2020-05-18'))
 
 if 1 == 0:
     showSections(assignSections())

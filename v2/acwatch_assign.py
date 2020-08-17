@@ -85,6 +85,6 @@ def validate(schedule):
             raise Exception('ERROR: Please re-run')
 
 if 1 == 0:
-    validate(assignAC(initializeWeek(), '2020-05-18', True))
+    validate(assignAC(initializeWeek(), '2020-08-24', True))
 
-    show(assignAC(initializeWeek(), '2020-05-18', True))
+    show(assignAC(initializeWeek(), '2020-08-24', True))

@@ -26,22 +26,35 @@ This event was created by the Automated Adjutant Program: if there are any issue
 METHODS
 """
 
-# # FOR DUTIES NOT WATCHES
-# def makeDuty(info):
-#     duty = {
-#         'summary' : info.name() + ' ' + info.position(),
-#         'description' : operational['description'] + ' Relieving: ' + info.previous(),
-#         'start' : {
-#             'date' : info.start_date(),
-#         },
-#         'end' : {
-#             'date' : info.end_date(),
-#         },
-#         'attendees' : [
-#             {'email' : getEmail(info.name())},
-#         ],
-#     }
-#     return duty
+# FOR DUTIES NOT WATCHES
+def makeDuty(info):
+    duty = {
+        'summary' : info.name() + ' ' + info.position(),
+        'description' : ' Relieving: ' + info.previous() +"\n"+ operational['description'],
+        'start' : {
+            'date' : info.start_date(),
+        },
+        'end' : {
+            'date' : info.end_date(),
+        },
+        'attendees' : [
+            {'email' : getEmail(info.name())},
+        ],
+        "reminders": {
+           "useDefault": False,
+           "overrides": [
+               {
+               "method": "email",
+               "minutes": "1440"
+               },
+               {
+               "method": "popup",
+               "minutes": "30"
+               }
+           ]
+       }
+    }
+    return duty
 
 def makeDutyDay(info):
     attendees = []
@@ -77,7 +90,17 @@ def makeWatch(info):
             {'email' : getEmail(info.name())},
         ],
          "reminders": {
-            "useDefault": True,
+            "useDefault": False,
+            "overrides": [
+                {
+                "method": "email",
+                "minutes": "1440"
+                },
+                {
+                "method": "popup",
+                "minutes": "30"
+                }
+            ]
         }
     }
     return watch
@@ -93,17 +116,17 @@ def push(event):
 
 
 if 1 == 0:
-    acdoData = assignDO(2,initialize(6,7))
+    # acdoData = assignDO(2,initialize(6,7))
     # show(acdoData)
     for duty in acdoData:
         print(makeDuty(duty))
         # push(makeDuty(duty))
-if 1 == 0:
-    cdoData = assignDO(1,initialize(6,7))
+if 1 == 1:
+    cdo = Duty('CDO', '2020-07-27', '2020-08-18', 'Trammell', 'Chavez')
+    # cdoData = assignDO(1,initialize(6,7))
     # show(cdoData)
-    for duty in cdoData:
-        print(makeDuty(duty))
-        # push(makeDuty(duty))
+    # print(makeDuty(cdo))
+    push(makeDuty(cdo))
 
 if 1 == 0:
     dutyData = assignDutyDay(4,'2020-08-18')
@@ -111,7 +134,7 @@ if 1 == 0:
     print(makeDutyDay(dutyData))
     # push(makeDuty(duty))
 
-if 1 == 1:
+if 1 == 0:
     order = []
     schedule = assignWatch(order,'2020-08-22')
     for watch in schedule:

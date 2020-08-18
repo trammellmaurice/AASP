@@ -8,6 +8,7 @@ from info import *
 # from acwatch_assign import *
 from duty_section_assign import *
 from watch_day_assign import *
+from acwatch_assign import *
 
 """
 INPUT CONSTANTS
@@ -18,7 +19,7 @@ testing = {
 }
 
 operational = {
-'description' : """***UOD, SHOW UP 5 MINUTES EARLY***
+'description' : """ Uniform of the Day, arrive 5 minutes early if possible
 This event was created by the Automated Adjutant Program: if there are any issues with this event (time, date, assignment, description, etc.) please contact your Company Adjutant m216762@usna.edu""",
 }
 
@@ -40,19 +41,19 @@ def makeDuty(info):
         'attendees' : [
             {'email' : getEmail(info.name())},
         ],
-        "reminders": {
-           "useDefault": False,
-           "overrides": [
-               {
-               "method": "email",
-               "minutes": "1440"
-               },
-               {
-               "method": "popup",
-               "minutes": "30"
-               }
-           ]
-       }
+       #  "reminders": {
+       #     "useDefault": False,
+       #     "overrides": [
+       #         {
+       #         "method": "email",
+       #         "minutes": "1440"
+       #         },
+       #         {
+       #         "method": "popup",
+       #         "minutes": "30"
+       #         }
+       #     ]
+       # }
     }
     return duty
 
@@ -89,19 +90,19 @@ def makeWatch(info):
         'attendees' : [
             {'email' : getEmail(info.name())},
         ],
-         "reminders": {
-            "useDefault": False,
-            "overrides": [
-                {
-                "method": "email",
-                "minutes": "1440"
-                },
-                {
-                "method": "popup",
-                "minutes": "30"
-                }
-            ]
-        }
+        #  "reminders": {
+        #     "useDefault": False,
+        #     "overrides": [
+        #         {
+        #         "method": "email",
+        #         "minutes": "1440"
+        #         },
+        #         {
+        #         "method": "popup",
+        #         "minutes": "30"
+        #         }
+        #     ]
+        # }
     }
     return watch
 
@@ -115,18 +116,19 @@ def push(event):
     print ('Event created: %s' % (event.get('htmlLink')))
 
 
-if 1 == 0:
-    # acdoData = assignDO(2,initialize(6,7))
-    # show(acdoData)
-    for duty in acdoData:
-        print(makeDuty(duty))
-        # push(makeDuty(duty))
-if 1 == 1:
-    cdo = Duty('CDO', '2020-07-27', '2020-08-18', 'Trammell', 'Chavez')
-    # cdoData = assignDO(1,initialize(6,7))
-    # show(cdoData)
-    # print(makeDuty(cdo))
-    push(makeDuty(cdo))
+# if 1 == 0:
+#     # acdoData = assignDO(2,initialize(6,7))
+#     # show(acdoData)
+#     for duty in acdoData:
+#         print(makeDuty(duty))
+#         # push(makeDuty(duty))
+#
+# if 1 == 0:
+#     cdo = Duty('CDO', '2020-07-27', '2020-08-18', 'Trammell', 'Chavez')
+#     # cdoData = assignDO(1,initialize(6,7))
+#     # show(cdoData)
+#     print(makeDuty(cdo))
+#     # push(makeDuty(cdo))
 
 if 1 == 0:
     dutyData = assignDutyDay(4,'2020-08-18')
@@ -135,19 +137,21 @@ if 1 == 0:
     # push(makeDuty(duty))
 
 if 1 == 0:
-    order = []
+    order = [] # Fill this in with the list of watchstanders for ever watch EXACTLY as it is in the watchbill (with duplicates)
+    # order = ["Bly","Bly","Arline","Arline","Bly"...]
     schedule = assignWatch(order,'2020-08-22')
     for watch in schedule:
-        # print(makeWatch(watch))
-        push(makeWatch(watch))
-        # time.sleep(3)
-
-if 1 == 0:
-    acWatch = assignAC(initializeWeek(),'2020-06-08',True)
-    validate(acWatch)
-    for watch in acWatch:
         print(makeWatch(watch))
         # push(makeWatch(watch))
+        # time.sleep(3)
+
+if 1 == 1:
+    acWatch = assignAC(initializeWeek(['W','R','F']), '2020-08-17', True)
+    validate(acWatch)
+    for watch in acWatch:
+        w = makeWatch(watch)
+        print(w)
+        # push(w)
 
 # sample event as template
 """event = {

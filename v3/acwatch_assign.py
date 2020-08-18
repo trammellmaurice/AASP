@@ -59,9 +59,10 @@ def assignAC(schedule, monday_date, shuffle = False):
         times[keys[i]].append(dates[i//6])
     # print(times)
     data = {}
-    mids_list = getThird()
+    mids_list = getFourth()
     if shuffle:
-        mids_list.reverse()
+        # mids_list.reverse()
+        random.shuffle(mids_list)
     for mid in mids_list:
         data[mid] = getFreePeriods(mid) #update a data dictionary
 
@@ -84,7 +85,51 @@ def validate(schedule):
         if set([type(Watch())]) != set(types):
             raise Exception('ERROR: Please re-run')
 
-if 1 == 0:
-    validate(assignAC(initializeWeek(), '2020-08-24', True))
+"""
+TIME & DATE STUFF
+"""
+def getWeekDates(start_date): #GET A LIST OF DATES THAT WEEK ***MUST BE A MONDAY***
+    base_date = start_date.split('-')
+    start = None
+    list = []
+    # print(int(base_date[1]))
+    # get month iterator for that month
+    counter = 0;
+    for date in calendar.Calendar().itermonthdates(int(base_date[0]), int(base_date[1])):
+        if str(date) == start_date and date.weekday() != 0: # make sure they input a monday
+            raise Exception('Input the Monday Date')
+        elif str(date) == start_date:
+            start = date
+        if start and date >=start:
+            if counter < 5:
+                list.append(str(date))
+                counter+=1
+            else:
+                return list
 
-    show(assignAC(initializeWeek(), '2020-08-24', True))
+# def getDayOfWeek(date_number):
+#     if date_number == 0:
+#         return 'Monday'
+#     elif date_number == 1:
+#         return 'Tuesday'
+#     elif date_number == 2:
+#         return 'Wednesday'
+#     elif date_number == 3:
+#         return 'Thursday'
+#     elif date_number == 4:
+#         return 'Friday'
+#     elif date_number == 5:
+#         return 'Saturday'
+#     elif date_number == 6:
+#         return 'Sunday'
+
+def show(schedule):
+    for duty in schedule:
+        duty.show()
+
+
+if 1 == 0:
+    schedule = assignAC(initializeWeek(['W','R','F']), '2020-08-17', True)
+    validate(schedule)
+
+    show(schedule)

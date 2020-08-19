@@ -183,14 +183,14 @@ def getEmail(mid):
 
 ##########################################################################
 
-def getFirst():
-    return list(first.keys())
-
-def getSecond():
-    return list(second.keys())
-
-def getThird():
-    return list(third.keys())
+# def getFirst():
+#     return list(first.keys())
+#
+# def getSecond():
+#     return list(second.keys())
+#
+# def getThird():
+#     return list(third.keys())
 
 def getFourth():
     return list(fourth.keys())

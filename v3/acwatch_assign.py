@@ -128,8 +128,8 @@ def show(schedule):
         duty.show()
 
 
-if 1 == 0:
-    schedule = assignAC(initializeWeek(['W','R','F']), '2020-08-17', True)
+if 1 == 1:
+    schedule = assignAC(initializeWeek(['M']), '2020-08-17', True)
     validate(schedule)
 
     show(schedule)

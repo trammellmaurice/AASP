@@ -128,7 +128,7 @@ def show(schedule):
         duty.show()
 
 
-if 1 == 1:
+if 1 == 0:
     schedule = assignAC(initializeWeek(['M']), '2020-08-17', True)
     validate(schedule)
 

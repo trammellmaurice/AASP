@@ -20,7 +20,7 @@ testing = {
 
 operational = {
 'description' : """ Uniform of the Day, arrive 5 minutes early if possible
-This event was created by the Automated Adjutant Program: if there are any issues with this event (time, date, assignment, description, etc.) please contact your Company Adjutant m216762@usna.edu""",
+This event was created by the SENTRY SYSTEM: if there are any issues with this event (time, date, assignment, description, etc.) please contact your COMPANY WATCH SERGEANT m227074@usna.edu""",
 }
 
 """
@@ -136,16 +136,16 @@ if 1 == 0:
     print(makeDutyDay(dutyData))
     # push(makeDuty(duty))
 
-if 1 == 0:
-    order = [] # Fill this in with the list of watchstanders for ever watch EXACTLY as it is in the watchbill (with duplicates)
+if 1 == 1:
+    order = ['Zimmer','Cerniglia','Cerniglia','Cerniglia','Zimmer','Zimmer','Brown','Brown','Brown','Kimmel','Kimmel','Kimmel','Kampling','Kampling','Kampling','Barta','Medina'] # Fill this in with the list of watchstanders for ever watch EXACTLY as it is in the watchbill (with duplicates)
     # order = ["Bly","Bly","Arline","Arline","Bly"...]
-    schedule = assignWatch(order,'2020-08-22')
+    schedule = assignWatch(order,'2020-08-23',ACWATCH = False)
     for watch in schedule:
-        print(makeWatch(watch))
-        # push(makeWatch(watch))
+        # print(makeWatch(watch))
+        push(makeWatch(watch))
         # time.sleep(3)
 
-if 1 == 1:
+if 1 == 0:
     acWatch = assignAC(initializeWeek(['W','R','F']), '2020-08-17', True)
     validate(acWatch)
     for watch in acWatch:
